@@ -1,6 +1,7 @@
 package com.br.hrworker.resource;
 
 import com.br.hrworker.entities.Worker;
+import com.br.hrworker.entities.request.WorkerRequest;
 import com.br.hrworker.repository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,16 @@ public class WorkerResource {
     @GetMapping(value = "/Param")
     public ResponseEntity<Optional<Worker>> FindWorkerQueryParam(@RequestParam Long id){
         return ResponseEntity.ok(repository.findById(id));
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> Worker(@RequestBody WorkerRequest workerRequest){
+        System.out.println(workerRequest.name);
+        System.out.println(workerRequest.id);
+
+        for (var opcao: workerRequest.option) {
+            System.out.println(opcao.name);
+        }
+        return ResponseEntity.ok("Post concluido com sucesso");
     }
 }
